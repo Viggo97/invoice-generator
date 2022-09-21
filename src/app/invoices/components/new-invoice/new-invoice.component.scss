@@ -1,0 +1,19 @@
+section {
+  min-width: 300px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+
+  mat-form-field {
+    margin-right: 10px;
+    width: 200px;
+  }
+}
+
+span {
+  color: #683ab7;
+}
+
+.add-btn {
+  margin: 10px 0 20px;
+}

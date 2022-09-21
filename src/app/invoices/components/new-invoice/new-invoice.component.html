@@ -1,1 +1,51 @@
-<p>new-invoice works!</p>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+  <ng-container formArrayName="invoices">
+
+    <ng-container *ngFor="let invoiceForm of invoices.controls; let i = index">
+
+      <section [formGroupName]="i">
+
+        <mat-form-field appearance="fill">
+          <mat-label>Name</mat-label>
+          <input matInput type="text" formControlName="name">
+          <mat-error *ngIf="invoiceForm.get('name')!.hasError('required')">Please enter name</mat-error>
+          <mat-error *ngIf="invoiceForm.get('name')!.hasError('minlength')">Min length 3</mat-error>
+          <mat-error *ngIf="invoiceForm.get('name')!.hasError('maxlength')">Max length 30</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Count</mat-label>
+          <input matInput type="number" formControlName="count">
+          <mat-error *ngIf="invoiceForm.get('count')!.hasError('min')">Min 1</mat-error>
+          <mat-error *ngIf="invoiceForm.get('count')!.hasError('max')">Max length 100</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Price</mat-label>
+          <input matInput type="number" formControlName="price">
+          <mat-error *ngIf="invoiceForm.get('price')!.hasError('min')">Min 1</mat-error>
+          <mat-error *ngIf="invoiceForm.get('price')!.hasError('max')">Max 1000000</mat-error>
+        </mat-form-field>
+
+        <mat-icon fontIcon="delete" color="primary" (click)="deleteInvoice(i)"></mat-icon>
+
+      </section>
+
+    </ng-container>
+
+  </ng-container>
+
+  <button mat-button class="add-btn" type="button" (click)="addInvoice()">
+    <mat-icon fontIcon="add" color="primary"></mat-icon>
+    <span mat class="mat-color-primary">Add new item</span>
+  </button>
+
+  <div *ngIf="!hasItems">
+    <h3>Please add items</h3>
+  </div>
+
+  <div>
+    <button mat-raised-button color="primary" type="submit">Submit</button>
+  </div>
+</form>
