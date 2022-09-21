@@ -7,6 +7,7 @@ import { InvoicesRoutingModule } from './invoices-routing.module';
 import { NewInvoiceComponent } from './components/new-invoice/new-invoice.component';
 import { PreviewInvoiceComponent } from './components/preview-invoice/preview-invoice.component';
 import { SharedModule } from '../shared/shared.module';
+import { PhoneFormatterPipe } from './pipes/phone-formatter/phone-formatter.pipe';
 
 @NgModule({
   imports: [
@@ -16,7 +17,11 @@ import { SharedModule } from '../shared/shared.module';
     ReactiveFormsModule,
     RouterModule,
   ],
-  declarations: [NewInvoiceComponent, PreviewInvoiceComponent],
+  declarations: [
+    NewInvoiceComponent,
+    PreviewInvoiceComponent,
+    PhoneFormatterPipe,
+  ],
   exports: [],
 })
 export class InvoicesModule {}
