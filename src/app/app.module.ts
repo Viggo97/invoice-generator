@@ -18,7 +18,7 @@ import { SharedModule } from './shared/shared.module';
     AppRoutingModule,
     BrowserAnimationsModule,
     BrowserModule,
-    HttpClientInMemoryWebApiModule.forRoot(DataService),
+    HttpClientInMemoryWebApiModule.forRoot(DataService, { delay: 1000 }),
     InvoicesModule,
     LayoutModule,
     SharedModule,

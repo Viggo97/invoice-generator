@@ -1,42 +1,45 @@
-<h2>Invoice Preview</h2>
 <ng-container *ngIf="companies$ | async as companies; else loading">
   <ng-container *ngFor="let company of companies">
     <h3>{{ company.name }}</h3>
     <h3>{{ company.address }}</h3>
     <h3>Phones: <ng-container *ngFor="let phone of company.phones; last as isLast">{{ phone | phoneFormatter: isLast }}</ng-container></h3>
   </ng-container>
+
+  <div class="hr"></div>
+
+  <ng-container *ngIf="invoices.length; else noItems">
+    <table>
+      <tr>
+        <th>#</th>
+        <th>Item</th>
+        <th>Count</th>
+        <th>Price</th>
+      </tr>
+      <tr *ngFor="let invoice of invoices; let i = index">
+        <td>{{ i }}</td>
+        <td>{{ invoice.name }}</td>
+        <td>{{ invoice.count }}</td>
+        <td>{{ invoice.price }}</td>
+      </tr>
+      <tr><td colspan="4">Sum: {{ this.amount }}</td></tr>
+    </table>
+  </ng-container>
+
+  <ng-template #noItems>
+    <h3>No items!</h3>
+  </ng-template>
 </ng-container>
 
 <ng-template #loading>
-  <mat-progress-spinner
-    class="example-margin"
-    [color]="'primary'"
-    [mode]="'indeterminate'"
-    [value]="50">
-  </mat-progress-spinner>
+  <div class="loading">
+    <mat-progress-spinner
+      class="example-margin"
+      [color]="'primary'"
+      [mode]="'indeterminate'"
+      [value]="50">
+    </mat-progress-spinner>
+  </div>
 </ng-template>
 
-<div class="hr"></div>
 
-<ng-container *ngIf="invoices.length; else noItems">
-  <table>
-    <tr>
-      <th>#</th>
-      <th>Item</th>
-      <th>Count</th>
-      <th>Price</th>
-    </tr>
-    <tr *ngFor="let invoice of invoices; let i = index">
-      <td>{{ i }}</td>
-      <td>{{ invoice.name }}</td>
-      <td>{{ invoice.count }}</td>
-      <td>{{ invoice.price }}</td>
-    </tr>
-    <tr><td colspan="4">Sum: {{ this.amount }}</td></tr>
-  </table>
-</ng-container>
-
-<ng-template #noItems>
-  <h3>No items!</h3>
-</ng-template>
 
